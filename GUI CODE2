@@ -1,0 +1,45 @@
+import calendar
+import tkinter as tk
+from tkinter import ttk
+
+def show_calendar():
+    year = int(year_entry.get())
+    month = int(month_entry.get())
+    
+    cal_data = calendar.monthcalendar(year, month)
+    for r_idx, week in enumerate(cal_data):
+        for c_idx, day in enumerate(week):
+            if day != 0:
+                cal_label = ttk.Label(calendar_frame, text=str(day))
+                cal_label.grid(row=r_idx+1, column=c_idx, padx=5, pady=5)
+    
+# Create the main window
+root = tk.Tk()
+root.title("GUI Calendar")
+
+# Create frame for input widgets
+input_frame = ttk.Frame(root)
+input_frame.pack(pady=10)
+
+# Year Entry
+year_label = ttk.Label(input_frame, text="Enter Year:")
+year_label.grid(row=0, column=0, padx=5, pady=5)
+year_entry = ttk.Entry(input_frame)
+year_entry.grid(row=0, column=1, padx=5, pady=5)
+
+# Month Entry
+month_label = ttk.Label(input_frame, text="Enter Month:")
+month_label.grid(row=0, column=2, padx=5, pady=5)
+month_entry = ttk.Entry(input_frame)
+month_entry.grid(row=0, column=3, padx=5, pady=5)
+
+# Button to show calendar
+show_button = ttk.Button(input_frame, text="Show Calendar", command=show_calendar)
+show_button.grid(row=0, column=4, padx=5, pady=5)
+
+# Create frame for calendar display
+calendar_frame = ttk.Frame(root)
+calendar_frame.pack()
+
+# Run the main event loop
+root.mainloop()
